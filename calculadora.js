@@ -2,10 +2,10 @@ document.getElementById("formFisico").addEventListener("submit", function(e){
 
     e.preventDefault();
 
-    let edad = parseFloat(document.getElementById("edad").value);
-    let estatura = parseFloat(document.getElementById("altura").value);
-    let peso = parseFloat(document.getElementById("peso").value);
-    let PDE = parseFloat(document.getElementById("PDE").value);
+    let edad = parseFloat(document.getElementById("edadpj").value);
+    let estatura = parseFloat(document.getElementById("estaturapj").value);
+    let peso = parseFloat(document.getElementById("pesopj").value);
+    let PDE = parseFloat(document.getElementById("PDEpj").value);
 
     if (!peso || !estatura) {
         alert("Error: Debes ingresar un peso y una altura válidos.");
@@ -78,7 +78,6 @@ document.getElementById("formFisico").addEventListener("submit", function(e){
         (factor * calculaVelocidad(peso, altura, edad, PDE)) * 100
     ) / 100;
 
-    // BUG CORREGIDO (peso añadido)
     let vitalidad = Math.round(
         factor * calculaVitalidad(edad, peso, altura, PDE)
     );
