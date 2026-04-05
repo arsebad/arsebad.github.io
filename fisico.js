@@ -156,7 +156,7 @@ function calculaEstamina(PDE, altura, peso, edad) {
         FactorEdad = 1 - ((edad - 27) * 0.001);
     }
     else {
-        FactorEdad = 1 - ((edad - 35) * 0.02);        
+        FactorEdad = 1 - ((edad - 35) * 0.011);        
     }
 
     let FactorIMC = (6 * FactorEdad) - Math.max((Math.abs(IMC - 21.7) * 0.1), 0.5);
