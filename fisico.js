@@ -69,13 +69,13 @@ function calculaFactorEdad(edad) {
         factoredad = 1 - (Math.abs(edad - 25) * 0.001);
     } 
     else if (edad <= 45) {
-        factoredad = 1 - ((edad - 30) * 0.01);
-    } 
-    else if (edad <= 55) {
         factoredad = 1 - ((edad - 30) * 0.003);
     } 
+    else if (edad <= 55) {
+        factoredad = 1 - ((edad - 30) * 0.005);
+    } 
     else {
-        factoredad = 1 - ((edad - 30) * 0.05);
+        factoredad = 1 - ((edad - 30) * 0.011);
     }
 
     return factoredad;
@@ -149,14 +149,14 @@ function calculaEstamina(PDE, altura, peso, edad) {
     let IMC = calculaIMC(peso, altura);
     let FactorEdad;
 
-    if (edad > 35) {
-        FactorEdad = 1 - ((edad - 35) * 0.02);
-    } 
-    else if (edad >= 20) {
+    if (edad < 20) {
+      FactorEdad = 1 - (Math.abs(edad - 20) * 0.05);
+    }
+    Else if ( edad < 35) {
         FactorEdad = 1 - ((edad - 27) * 0.001);
-    } 
+    }
     else {
-        FactorEdad = 1 - (Math.abs(edad - 20) * 0.05);
+        FactorEdad = 1 - ((edad - 35) * 0.02);        
     }
 
     let FactorIMC = (6 * FactorEdad) - Math.max((Math.abs(IMC - 21.7) * 0.1), 0.5);
