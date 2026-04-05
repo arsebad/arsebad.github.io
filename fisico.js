@@ -150,9 +150,9 @@ function calculaEstamina(PDE, altura, peso, edad) {
     let FactorEdad;
 
     if (edad < 20) {
-      FactorEdad = 1 - (Math.abs(edad - 20) * 0.05);
+        FactorEdad = 1 - (Math.abs(edad - 20) * 0.05);
     }
-    Else if ( edad < 35) {
+    else if ( edad < 35) {
         FactorEdad = 1 - ((edad - 27) * 0.001);
     }
     else {
