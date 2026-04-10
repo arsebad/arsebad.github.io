@@ -86,8 +86,8 @@ document.getElementById("formFisico").addEventListener("submit", function(e){
         factor * calculaReflejos(PDE, altura, peso)
     );
 
-    let fuerza = Math.round(
-        factor * calculaFuerza(edad, peso, altura, PDE)
+    let fuerza = (Math.round(
+        factor * calculaFuerza(edad, peso, altura, PDE))/2
     );
 
     let energia = Math.round(
