@@ -1,2 +1,2 @@
-# Elynfaria-s-Stats-Calculator-1.26.4.2
-Stats Calculator from Roleplay Game in whatsapp Group Comunity.
+# Elynfaria-s-RPG-Proyect-1.26.5.19
+RPG basic.
