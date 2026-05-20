@@ -4,14 +4,55 @@ body{
     background:#ffffff;
 }
 
+#game{
+    position:relative;
+    width:100vw;
+    height:100vh;
+    overflow:hidden;
+}
+
+#world{
+    position:absolute;
+
+    width: 2000px;;
+    height: 2000px;
+
+    background:url("../img/pueblo.png");
+    background-size:cover;
+}
+
+ /*#fondo{
+    position:absolute;
+
+    width:3000px;
+    height:2000px;
+
+    background-image:url("fondo.jpg");
+    background-size:cover;
+
+    left:0;
+    top:0;
+}*/
+
 #cuadrado{
     position: absolute;
 
-    width:100px;
-    height:100px;
+    width:30px;
+    height: 30px;
 
     background:red;
 
-    left:100px;
-    top:100px;
+}
+
+
+#npc{
+    position:absolute;
+
+    width:80px;
+    height:80px;
+
+    background:blue;
+
+    left:1000px;
+    top:500px;
 }
