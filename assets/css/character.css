@@ -1,0 +1,17 @@
+body{
+    margin:0;
+    overflow:hidden;
+    background:#ffffff;
+}
+
+#cuadrado{
+    position: absolute;
+
+    width:100px;
+    height:100px;
+
+    background:red;
+
+    left:100px;
+    top:100px;
+}

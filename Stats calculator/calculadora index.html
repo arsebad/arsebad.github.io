@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stats Calculator</title>
+
+<style>
+
+body{
+    font-family: Arial, sans-serif;
+}
+
+.contenedor{
+    display: flex;
+    gap: 40px;
+    align-items: flex-start;
+}
+
+.panel{
+    border: 1px solid black;
+    padding: 15px;
+}
+
+table{
+    border-collapse: collapse;
+}
+
+td, th{
+    border: 1px solid black;
+    padding: 6px 10px;
+}
+
+</style>
+</head>
+
+
+<body>
+
+<h2>Calculadora de Estadísticas</h2>
+
+<div class="contenedor">
+
+<!-- PANEL IZQUIERDO -->
+<div class="panel">
+
+<form id="formFisico">
+
+<table>
+
+<tr>
+<th colspan="2">DATOS</th>
+</tr>
+
+<tr>
+<td>Edad</td>
+<td>
+<input type="number" id="edadpj" required max="90" min="15">
+años
+</td>
+</tr>
+
+<tr>
+<td>Altura</td>
+<td>
+<input type="number" id="estaturapj" min="140" required max="200">
+cm
+</td>
+</tr>
+
+<tr>
+<td>Peso</td>
+<td>
+<input type="number" id="pesopj" required max="200">
+kg
+</td>
+</tr>
+
+<tr>
+<td>% Entrenamiento</td>
+<td>
+<input type="number" id="PDEpj" min="5" max="50" required>
+%
+</td>
+</tr>
+
+</table>
+
+<br>
+
+<button type="submit">Calcular</button>
+
+</form>
+
+</div>
+
+
+<!-- PANEL DERECHO -->
+<div class="panel">
+
+<table>
+
+<tr>
+<th>ESTADISTICA</th>
+<th>VALOR</th>
+</tr>
+
+<tr>
+<td>Vitalidad</td>
+<td id="resVitalidad">-</td>
+</tr>
+
+<tr>
+<td>Energía</td>
+<td id="resEnergia">-</td>
+</tr>
+
+<tr>
+<td>Fuerza</td>
+<td id="resFuerza">-</td>
+</tr>
+
+<tr>
+<td>Reflejos</td>
+<td id="resReflejos">-</td>
+</tr>
+
+<tr>
+<td>Resistencia</td>
+<td id="resEstamina">-</td>
+</tr>
+
+<tr>
+<td>Velocidad</td>
+<td id="resVelocidad">-</td>
+</tr>
+
+</table>
+
+</div>
+
+</div>
+
+<script src="fisico.js"></script>
+<script src="calculadora.js"></script>
+
+</body>
+</html>

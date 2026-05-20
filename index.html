@@ -1,149 +1,58 @@
 <!DOCTYPE html>
-<html lang="es">
-
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Stats Calculator</title>
-
-<style>
-
-body{
-    font-family: Arial, sans-serif;
-}
-
-.contenedor{
-    display: flex;
-    gap: 40px;
-    align-items: flex-start;
-}
-
-.panel{
-    border: 1px solid black;
-    padding: 15px;
-}
-
-table{
-    border-collapse: collapse;
-}
-
-td, th{
-    border: 1px solid black;
-    padding: 6px 10px;
-}
-
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="assets/css/character.css">
+    <title>elynfaria</title>
 </head>
+
 
 
 <body>
 
-<h2>Calculadora de Estadísticas</h2>
-
-<div class="contenedor">
-
-<!-- PANEL IZQUIERDO -->
-<div class="panel">
-
-<form id="formFisico">
-
-<table>
-
-<tr>
-<th colspan="2">DATOS</th>
-</tr>
-
-<tr>
-<td>Edad</td>
-<td>
-<input type="number" id="edadpj" required max="90" min="15">
-años
-</td>
-</tr>
-
-<tr>
-<td>Altura</td>
-<td>
-<input type="number" id="estaturapj" min="140" required max="200">
-cm
-</td>
-</tr>
-
-<tr>
-<td>Peso</td>
-<td>
-<input type="number" id="pesopj" required max="200">
-kg
-</td>
-</tr>
-
-<tr>
-<td>% Entrenamiento</td>
-<td>
-<input type="number" id="PDEpj" min="5" max="50" required>
-%
-</td>
-</tr>
-
-</table>
-
-<br>
-
-<button type="submit">Calcular</button>
-
-</form>
-
-</div>
+<div id="cuadrado"></div>
 
 
-<!-- PANEL DERECHO -->
-<div class="panel">
+<script>
 
-<table>
+    const cuadrado = document.getElementById("cuadrado");
 
-<tr>
-<th>ESTADISTICA</th>
-<th>VALOR</th>
-</tr>
+    let x = 100
+    let y = 100
 
-<tr>
-<td>Vitalidad</td>
-<td id="resVitalidad">-</td>
-</tr>
+    const velocidad = 10
 
-<tr>
-<td>Energía</td>
-<td id="resEnergia">-</td>
-</tr>
 
-<tr>
-<td>Fuerza</td>
-<td id="resFuerza">-</td>
-</tr>
+document.addEventListener("keydown", function(event){
+        if (event.key === "ArrowLeft") {
+            //movimiento izquierda
+            x -= velocidad
+        }
 
-<tr>
-<td>Reflejos</td>
-<td id="resReflejos">-</td>
-</tr>
+         if (event.key === "ArrowDown") {
+            //movimiento abajo
+            y += velocidad
+        }
 
-<tr>
-<td>Resistencia</td>
-<td id="resEstamina">-</td>
-</tr>
+         if (event.key === "ArrowUp") {
+            //movimiento arriba
+            y -= velocidad
+        }
 
-<tr>
-<td>Velocidad</td>
-<td id="resVelocidad">-</td>
-</tr>
+         if (event.key === "ArrowRight") {
+            //movimiento derecha
+            x +=velocidad
+        }
 
-</table>
+        cuadrado.style.left = x + "px";
+        cuadrado.style.top = y + "px";
+    })
 
-</div>
 
-</div>
+    document.write(new Date())
+</script>
 
-<script src="fisico.js"></script>
-<script src="calculadora.js"></script>
 
 </body>
 </html>
