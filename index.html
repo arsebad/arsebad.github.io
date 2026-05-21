@@ -1,161 +1,204 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="assets/css/character.css">
-    <title>elynfaria</title>
+
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+
+        canvas {
+            display: block;
+        }
+    </style>
 </head>
-
-
 
 <body>
 
-    <div id="game">
-          <div id="world">
-            <div id="fondo"></div>
-            <div id="cuadrado"></div>
-            <div id="npc"></div>
-        </div>
-    </div>
-  
+<canvas></canvas>
 
+<script >
+    function InputManager(target = window) {
 
+    this.target = target;
 
-<script>
+    this.events = {};
 
-    document.write(new Date())
-
-    const mundo = document.getElementById("world");
-
-    const cuadrado = document.getElementById("cuadrado");
-
-    const npc = document.getElementById("npc")
-
-    let xplayer = 400;
-    let yplayer = 300;
-
-    let xcamera = 0;
-    let ycamera = 0;
-
-    let xnpc = 880;
-    let ynpc = 855;
-
-
-
-    const velocidad = 5
-
-    const margen = 200
-
-
-    const teclas = {
-        ArrowLeft: false,
-        ArrowDown: false,
-        ArrowUp: false,
-        ArrowRight: false
+    this.state = {
+        pointer: {
+            down: false,
+            dragging: false,
+            startX: 0,
+            startY: 0,
+            x: 0,
+            y: 0,
+            dragX: 0,
+            dragY: 0
+        }
     };
 
-document.addEventListener("keydown", (event)=>{
-    if (event.key in teclas) {
-        teclas [event.key] = true;
-    }
-} );
+    this.on = function (event, cb) {
 
-document.addEventListener("keyup", (event)=>{
-    if (event.key in teclas) {
-        teclas [event.key] = false;
-    }
-} );
-
-function mover(){
-
-        if (teclas.ArrowLeft) {
-            //movimiento izquierda
-            xplayer -= velocidad
+        if (!this.events[event]) {
+            this.events[event] = [];
         }
 
-         if (teclas.ArrowDown) {
-            //movimiento abajo
-            yplayer += velocidad
+        this.events[event].push(cb);
+    };
+
+    this.emit = function (event, data) {
+
+        if (!this.events[event]) return;
+
+        for (const cb of this.events[event]) {
+            cb(data);
         }
+    };
 
-         if (teclas.ArrowUp) {
-            //movimiento arriba
-            yplayer -= velocidad
+    this.pointerDown = (e) => {
+
+        const p = this.state.pointer;
+
+        p.down = true;
+        p.dragging = false;
+
+        p.startX = e.clientX;
+        p.startY = e.clientY;
+
+        p.x = e.clientX;
+        p.y = e.clientY;
+
+        this.emit("press", p);
+    };
+
+    this.pointerMove = (e) => {
+
+        const p = this.state.pointer;
+
+        p.x = e.clientX;
+        p.y = e.clientY;
+
+        if (!p.down) return;
+
+        p.dragging = true;
+
+        p.dragX = p.x - p.startX;
+        p.dragY = p.y - p.startY;
+
+        this.emit("drag", p);
+    };
+
+    this.pointerUp = () => {
+
+        const p = this.state.pointer;
+
+        p.down = false;
+        p.dragging = false;
+
+        p.dragX = 0;
+        p.dragY = 0;
+
+        this.emit("release", p);
+    };
+
+    this.init = function () {
+
+        this.target.addEventListener("pointerdown", this.pointerDown);
+        this.target.addEventListener("pointermove", this.pointerMove);
+        this.target.addEventListener("pointerup", this.pointerUp);
+    };
+
+    this.init();
+}
+</script>
+<script>
+    const actions = {
+    move: { x: 0, y: 0 }
+};
+</script>
+<script>
+    function Player() {
+
+    this.x = 100;
+    this.y = 100;
+    this.speed = 4;
+
+    this.update = function (actions) {
+
+        this.x += actions.move.x * this.speed;
+        this.y += actions.move.y * this.speed;
+    };
+
+    this.draw = function (ctx) {
+
+        ctx.fillStyle = "red";
+        ctx.fillRect(this.x, this.y, 50, 50);
+    };
+}
+</script>
+<script>
+
+function setupInput(input, actions) {
+
+    input.on("drag", (p) => {
+
+        actions.move.x = 0;
+        actions.move.y = 0;
+
+        const absX = Math.abs(p.dragX);
+        const absY = Math.abs(p.dragY);
+
+        if (absX > absY) {
+            actions.move.x = p.dragX > 0 ? 1 : -1;
+        } else {
+            actions.move.y = p.dragY > 0 ? 1 : -1;
         }
+    });
 
-         if (teclas.ArrowRight) {
-            //movimiento derecha
-            xplayer +=velocidad
-        }
+    input.on("release", () => {
+        actions.move.x = 0;
+        actions.move.y = 0;
+    });
+}
 
-        const screenWidth = window.innerWidth;
-        const screenHeight = window.innerHeight;
+</script>
+<script >
 
-        const worldwidth = mundo.offsetWidth;
-        const worldheight = mundo.offsetHeight;
- 
-        if(xplayer < 0) xplayer = 0;
-        if(yplayer < 0) yplayer = 0;
+const canvas = document.querySelector("canvas");
+const ctx = canvas.getContext("2d");
 
-        if(xplayer > worldwidth) xplayer = worldwidth;
-        if(yplayer > worldheight) yplayer = worldheight;
+canvas.width = innerWidth;
+canvas.height = innerHeight;
 
-        
+const input = new InputManager(canvas);
+setupInput(input, actions);
 
+const player = new Player();
 
-        if (xplayer - xcamera > screenWidth - margen) {
-            xcamera = xplayer - (screenWidth - margen);
-        }
+function loop() {
 
-        if (xplayer - xcamera < margen) {
-            xcamera = xplayer - margen;
-        }
+    player.update(actions);
 
-        if (yplayer - ycamera > screenHeight - margen) {
-            ycamera = yplayer - (screenHeight - margen);
-        }
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-        if (yplayer - ycamera < margen) {
-            ycamera = yplayer - margen;
-        }
-        
+    player.draw(ctx);
 
-        xcamera = Math.max(0, xcamera);
-        ycamera = Math.max(0, ycamera);
+    requestAnimationFrame(loop);
+}
 
+loop();
 
-        xcamera = Math.min(
-            xcamera,
-            worldwidth - screenWidth
-        );
-
-        ycamera = Math.min(
-            ycamera,
-            worldheight - screenHeight
-        );
-
-        
-
-        cuadrado.style.left = xplayer + "px";
-        cuadrado.style.top = yplayer + "px";
-
-        mundo.style.left = -xcamera + "px";
-        mundo.style.top = -ycamera + "px";
-
-        npc.style.left = xnpc + "px";
-        npc.style.top = ynpc + "px";
-
-
-
-        requestAnimationFrame(mover);
-    }
-    mover();
-
-
-    
 </script>
 
+<script>
+    const canvas = document.querySelector("canvas");
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+</script>
 
 </body>
 </html>

@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="assets/css/character.css">
+    <title>elynfaria</title>
+</head>
+
+
+
+<body>
+
+    <div id="game">
+          <div id="world">
+            <div id="fondo"></div>
+            <div id="cuadrado"></div>
+            <div id="npc"></div>
+        </div>
+    </div>
+  
+
+
+
+<script>
+
+    document.write(new Date())
+
+    const mundo = document.getElementById("world");
+
+    const cuadrado = document.getElementById("cuadrado");
+
+    const npc = document.getElementById("npc")
+
+    let xplayer = 400;
+    let yplayer = 300;
+
+    let xcamera = 0;
+    let ycamera = 0;
+
+    let xnpc = 880;
+    let ynpc = 855;
+
+
+
+    const velocidad = 5
+
+    const margen = 200
+
+
+    const teclas = {
+        ArrowLeft: false,
+        ArrowDown: false,
+        ArrowUp: false,
+        ArrowRight: false
+    };
+
+document.addEventListener("keydown", (event)=>{
+    if (event.key in teclas) {
+        teclas [event.key] = true;
+    }
+} );
+
+document.addEventListener("keyup", (event)=>{
+    if (event.key in teclas) {
+        teclas [event.key] = false;
+    }
+} );
+
+function mover(){
+
+        if (teclas.ArrowLeft) {
+            //movimiento izquierda
+            xplayer -= velocidad
+        }
+
+         if (teclas.ArrowDown) {
+            //movimiento abajo
+            yplayer += velocidad
+        }
+
+         if (teclas.ArrowUp) {
+            //movimiento arriba
+            yplayer -= velocidad
+        }
+
+         if (teclas.ArrowRight) {
+            //movimiento derecha
+            xplayer +=velocidad
+        }
+
+        const screenWidth = window.innerWidth;
+        const screenHeight = window.innerHeight;
+
+        const worldwidth = mundo.offsetWidth;
+        const worldheight = mundo.offsetHeight;
+ 
+        if(xplayer < 0) xplayer = 0;
+        if(yplayer < 0) yplayer = 0;
+
+        if(xplayer > worldwidth) xplayer = worldwidth;
+        if(yplayer > worldheight) yplayer = worldheight;
+
+        
+
+
+        if (xplayer - xcamera > screenWidth - margen) {
+            xcamera = xplayer - (screenWidth - margen);
+        }
+
+        if (xplayer - xcamera < margen) {
+            xcamera = xplayer - margen;
+        }
+
+        if (yplayer - ycamera > screenHeight - margen) {
+            ycamera = yplayer - (screenHeight - margen);
+        }
+
+        if (yplayer - ycamera < margen) {
+            ycamera = yplayer - margen;
+        }
+        
+
+        xcamera = Math.max(0, xcamera);
+        ycamera = Math.max(0, ycamera);
+
+
+        xcamera = Math.min(
+            xcamera,
+            worldwidth - screenWidth
+        );
+
+        ycamera = Math.min(
+            ycamera,
+            worldheight - screenHeight
+        );
+
+        
+
+        cuadrado.style.left = xplayer + "px";
+        cuadrado.style.top = yplayer + "px";
+
+        mundo.style.left = -xcamera + "px";
+        mundo.style.top = -ycamera + "px";
+
+        npc.style.left = xnpc + "px";
+        npc.style.top = ynpc + "px";
+
+
+
+        requestAnimationFrame(mover);
+    }
+    mover();
+
+
+    
+</script>
+
+
+</body>
+</html>
