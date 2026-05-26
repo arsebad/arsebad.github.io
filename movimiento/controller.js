@@ -28,6 +28,8 @@ function moverteclado(){
     function movertactil() {
         if (!isPressed) return;
 
+           if (inputx === null || inputy === null) return;
+
 
         let playerScreenX = xplayer - xcamera;
         let playerScreenY = yplayer - ycamera;

@@ -2,8 +2,8 @@ let isPressed = false;
 
 
 
-let inputx = 0;
-let inputy = 0;
+let inputx = null;
+let inputy = null;
 
 
 let starttouchx = 0;

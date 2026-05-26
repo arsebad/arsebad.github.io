@@ -50,9 +50,10 @@ const teclas = {
     const margen = 200
 
 </script>
-<script src="controlers/pointerload.js"> //pointerload </script>
-<script src="controlers/keyload.js"> //keyload</script> 
-<script src="controlers/controller.js"></script>
+<script src="movimiento/pointerload.js"> //pointerload </script>
+<script src="movimiento/keyload.js"> //keyload</script> 
+<script src="movimiento/controller.js">  // controller</script>
+<script src="colision/checkCollision.js"> //colision</script>
 
 
 <script>
@@ -66,6 +67,10 @@ function mover(){
 
         const worldwidth = mundo.offsetWidth;
         const worldheight = mundo.offsetHeight;
+
+
+
+
  
         if(xplayer < 0) xplayer = 0;
         if(yplayer < 0) yplayer = 0;
@@ -107,6 +112,8 @@ function mover(){
             worldheight - screenHeight
         );
 
+
+
         
 
         cuadrado.style.left = xplayer + "px";
@@ -118,19 +125,13 @@ function mover(){
         npc.style.left = xnpc + "px";
         npc.style.top = ynpc + "px";
 
-
-
+        if (checkcollision(xplayer, yplayer, cuadrado.offsetWidth, cuadrado.offsetHeight, xnpc, ynpc, npc.offsetWidth, npc.offsetHeight)){
+        let newposition = checkcollision(xplayer, yplayer, cuadrado.offsetWidth, cuadrado.offsetHeight, xnpc, ynpc, npc.offsetWidth, npc.offsetHeight);
+            xplayer = newposition.x;
+            yplayer = newposition.y;
+        } 
         
-        
-       /* checkCollision(
-            { x: xplayer, y: yplayer, w: cuadrado.offsetWidth, h: cuadrado.offsetHeight },
-            { x: xnpc, y: ynpc, w: npc.offsetWidth, h: npc.offsetHeight }
-        );
 
-        if (collisionState.isColliding) {
-            cuadrado.style.display = "none";
-            return;
-        }*/
 
         requestAnimationFrame(mover);
     
