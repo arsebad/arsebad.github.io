@@ -1,6 +1,6 @@
 
 
-function mover(){
+function moverteclado(){
 
         if (teclas.ArrowLeft) {
             //movimiento izquierda
@@ -22,11 +22,35 @@ function mover(){
             xplayer +=velocidad
         }
 
-        //pointer
+    }
 
-    
-        cuadrado.style.left = xplayer + "px";
-        cuadrado.style.top = yplayer + "px";
+
+    function movertactil() {
+        if (!isPressed) return;
+
+
+        let playerScreenX = xplayer - xcamera;
+        let playerScreenY = yplayer - ycamera;
+
+
+        let dx = inputx - playerScreenX;
+        let dy = inputy - playerScreenY;
+
+
+        let distancia = Math.hypot(dx, dy);
+
+
+        if(distancia < deadZone)return;
+
+
+        let nx = dx / distancia;
+        let ny = dy / distancia;
+
+        let xnewvelocidad = nx * velocidad;
+        let ynewvelocidad = ny * velocidad;
+
+        xplayer += xnewvelocidad;
+        yplayer += ynewvelocidad;
 
 
     }

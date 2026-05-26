@@ -52,30 +52,14 @@ const teclas = {
 </script>
 <script src="controlers/pointerload.js"> //pointerload </script>
 <script src="controlers/keyload.js"> //keyload</script> 
+<script src="controlers/controller.js"></script>
 
 
 <script>
 function mover(){
 
-        if (teclas.ArrowLeft) {
-            //movimiento izquierda
-            xplayer -= velocidad
-        }
-
-         if (teclas.ArrowDown) {
-            //movimiento abajo
-            yplayer += velocidad
-        }
-
-         if (teclas.ArrowUp) {
-            //movimiento arriba
-            yplayer -= velocidad
-        }
-
-         if (teclas.ArrowRight) {
-            //movimiento derecha
-            xplayer +=velocidad
-        }
+    moverteclado();
+    movertactil();
 
         const screenWidth = window.innerWidth;
         const screenHeight = window.innerHeight;
@@ -136,9 +120,9 @@ function mover(){
 
 
 
-        requestAnimationFrame(mover);
         
-        checkCollision(
+        
+       /* checkCollision(
             { x: xplayer, y: yplayer, w: cuadrado.offsetWidth, h: cuadrado.offsetHeight },
             { x: xnpc, y: ynpc, w: npc.offsetWidth, h: npc.offsetHeight }
         );
@@ -146,7 +130,9 @@ function mover(){
         if (collisionState.isColliding) {
             cuadrado.style.display = "none";
             return;
-        }
+        }*/
+
+        requestAnimationFrame(mover);
     
 }
     mover();
