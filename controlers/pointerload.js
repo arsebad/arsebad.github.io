@@ -17,14 +17,16 @@ window.addEventListener("pointerdown", (event)=> {
     isPressed = true
     starttouchx = event.clientX;
     starttouchy = event.clientY;
-})
+    e.preventDefault();
+}, { passive: false });
 
 window.addEventListener("pointermove", (event)=> {
     if(!isPressed)return;
 
    inputx = event.clientX;
    inputy = event.clientY;
-})
+    e.preventDefault();
+}, { passive: false });
 
 window.addEventListener("pointerup", (event)=> {
     isPressed = false;
