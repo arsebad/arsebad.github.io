@@ -12,3 +12,13 @@ document.addEventListener("keyup", (event)=>{
     }
 } );
 
+
+
+document.addEventListener("keydown", (event)=> {
+    if(!keys[event.code] ){
+        actualizarEstado(event.code);
+    }
+
+    keys[event.code] = true;
+})
+

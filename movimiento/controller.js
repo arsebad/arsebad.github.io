@@ -5,21 +5,25 @@ function moverteclado(){
         if (teclas.ArrowLeft) {
             //movimiento izquierda
             xplayer -= velocidad
+            estadoPlayer = 11
         }
 
          if (teclas.ArrowDown) {
             //movimiento abajo
             yplayer += velocidad
+            estadoPlayer = 1
         }
 
          if (teclas.ArrowUp) {
             //movimiento arriba
             yplayer -= velocidad
+            estadoPlayer = 1
         }
 
          if (teclas.ArrowRight) {
             //movimiento derecha
             xplayer +=velocidad
+            estadoPlayer = 12
         }
 
     }
@@ -29,6 +33,8 @@ function moverteclado(){
         if (!isPressed) return;
 
            if (inputx === null || inputy === null) return;
+
+        let origendireccion = xplayer
 
 
         let playerScreenX = xplayer - xcamera;
@@ -53,6 +59,14 @@ function moverteclado(){
 
         xplayer += xnewvelocidad;
         yplayer += ynewvelocidad;
+
+        if (origendireccion > xplayer) {
+            estadoPlayer = 11
+        } else if (origendireccion < xplayer) {
+            estadoPlayer = 12
+        }   else {
+            estadoPlayer = 1
+        }
 
 
     }

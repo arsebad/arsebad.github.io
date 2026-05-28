@@ -17,7 +17,7 @@ window.addEventListener("pointerdown", (event)=> {
     isPressed = true
     starttouchx = event.clientX;
     starttouchy = event.clientY;
-    e.preventDefault();
+    event.preventDefault();
 }, { passive: false });
 
 window.addEventListener("pointermove", (event)=> {
@@ -25,7 +25,7 @@ window.addEventListener("pointermove", (event)=> {
 
    inputx = event.clientX;
    inputy = event.clientY;
-    e.preventDefault();
+    event.preventDefault();
 }, { passive: false });
 
 window.addEventListener("pointerup", (event)=> {

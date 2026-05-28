@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="assets/css/character.css">
+    <link rel="stylesheet" href="assets/css/styles.css">
     <title>elynfaria</title>
 </head>
 
@@ -14,7 +14,7 @@
     <div id="game">
           <div id="world">
             <div id="fondo"></div>
-            <div id="cuadrado"></div>
+            <div id="player"></div>
             <div id="npc"></div>
         </div>
     </div>
@@ -25,7 +25,7 @@
 
     const mundo = document.getElementById("world");
 
-    const cuadrado = document.getElementById("cuadrado");
+    const player = document.getElementById("player");
 
     const npc = document.getElementById("npc")
 
@@ -38,29 +38,51 @@
     let xnpc = 880;
     let ynpc = 855;
 
+    let estadoPlayer = 0;
+
+    
+    let currentFrame = 0;
+    let lastUpdate = 0;
+
+
 const teclas = {
     ArrowLeft: false,
     ArrowDown: false,
     ArrowUp: false,
-    ArrowRight: false
+    ArrowRight: false,
+
 };
+
+const keys = {
+    KeyZ: false,
+    KeyX: false
+}
 
     const velocidad = 5
 
     const margen = 200
 
+
 </script>
 <script src="movimiento/pointerload.js"> //pointerload </script>
 <script src="movimiento/keyload.js"> //keyload</script> 
 <script src="movimiento/controller.js">  // controller</script>
-<script src="colision/checkCollision.js"> //colision</script>
+<script src="colision/cotrollCollision.js"> //colision</script>
+
+
+<script src="animacion/samurai.js">//animacion jugador</script>
+<script src="animacion/estado.js">//Estado</script>
+<script src="animacion/acciones.js">//acciones</script>
+
+
 
 
 <script>
-function mover(){
+function mover(time){
 
     moverteclado();
     movertactil();
+
 
         const screenWidth = window.innerWidth;
         const screenHeight = window.innerHeight;
@@ -116,8 +138,8 @@ function mover(){
 
         
 
-        cuadrado.style.left = xplayer + "px";
-        cuadrado.style.top = yplayer + "px";
+        player.style.left = xplayer + "px";
+        player.style.top = yplayer + "px";
 
         mundo.style.left = -xcamera + "px";
         mundo.style.top = -ycamera + "px";
@@ -125,8 +147,11 @@ function mover(){
         npc.style.left = xnpc + "px";
         npc.style.top = ynpc + "px";
 
-        if (checkcollision(xplayer, yplayer, cuadrado.offsetWidth, cuadrado.offsetHeight, xnpc, ynpc, npc.offsetWidth, npc.offsetHeight)){
-        let newposition = checkcollision(xplayer, yplayer, cuadrado.offsetWidth, cuadrado.offsetHeight, xnpc, ynpc, npc.offsetWidth, npc.offsetHeight);
+        actualizarEstado();
+        actualizarAccion(estadoPlayer, time);
+
+        if (getCollisionInfo(xplayer, yplayer, player.offsetWidth, player.offsetHeight, xnpc, ynpc, npc.offsetWidth, npc.offsetHeight)){
+        let newposition = resolveCollision(xplayer, yplayer, player.offsetWidth, player.offsetHeight, xnpc, ynpc, npc.offsetWidth, npc.offsetHeight);
             xplayer = newposition.x;
             yplayer = newposition.y;
         } 
