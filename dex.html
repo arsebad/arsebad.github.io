@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <title>elynfaria</title>
+</head>
+
+
+
+<body>
+
+    <div id="game">
+          <div id="world">
+            <div id="fondo"></div>
+            <div id="player"></div>
+            <div id="npc"></div>
+            <audio id="music">
+                <source  src="assets/audio/sound_0.mp3" type="mp3">
+            </audio>
+        </div>
+    </div>
+  
+
+<script>
+
+
+    let estadoPlayer = 0;
+
+    
+    let currentFrame = 0;
+    let lastUpdate = 0;
+
+
+
+
+
+
+    const velocidad = 5
+
+    const margen = 200
+
+
+</script>
+<script src="movimiento/pointerload.js"> //pointerload </script>
+<script src="movimiento/keyload.js"> //keyload</script> 
+<script src="movimiento/controller.js">  // controller</script>
+<script src="colision/cotrollCollision.js"> //colision</script>
+
+
+<script src="animacion/samurai.js">//animacion jugador</script>
+<script src="animacion/estado.js">//Estado</script>
+<script src="animacion/acciones.js">//acciones</script>
+
+
+
+
+<script>
+function mover(time){
+
+    moverteclado();
+    movertactil();
+    actualizarEstado();
+
+   
+        actualizarAccion(estadoPlayer, time);
+
+     
+
+        if (getCollisionInfo(xplayer, yplayer, player.offsetWidth, player.offsetHeight, xnpc, ynpc, npc.offsetWidth, npc.offsetHeight)){
+        let newposition = resolveCollision(xplayer, yplayer, player.offsetWidth, player.offsetHeight, xnpc, ynpc, npc.offsetWidth, npc.offsetHeight);
+            xplayer = newposition.x;
+            yplayer = newposition.y;
+        } 
+        
+
+
+        requestAnimationFrame(mover);
+    
+}
+    mover();
+    
+</script>
+
+
+</body>
+</html>

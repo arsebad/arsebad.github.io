@@ -4,7 +4,7 @@ body{
     background:#ffffff;
 }
 
-#game{
+#juego{
     position:relative;
     width:100vw;
     height:100vh;
@@ -12,7 +12,7 @@ body{
     touch-action: none;
 }
 
-#world{
+#mundo{
     position:absolute;
 
     width: 2000px;;
@@ -35,14 +35,12 @@ body{
     top:0;
 }*/
 
-#player{
-    position: absolute;
+#jugador{
 
-    width: 128px;
-    height: 128px;
 
-    
     background-repeat: no-repeat;
+    color: rgb(128, 0, 0);
+    background-image: url("../img/player/Idle.png");
 
 }
 
@@ -57,4 +55,12 @@ body{
 
     left:1000px;
     top:500px;
+}
+
+.entidad{
+    position:absolute;
+
+    width: 128px;
+    height:128px;
+
 }
